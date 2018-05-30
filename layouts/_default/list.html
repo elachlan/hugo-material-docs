@@ -19,28 +19,30 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Pages in {{ .Title | singularize }}</h1>
+			<h1>{{ .Title | singularize }}</h1>
+            {{ .Content }}
+            {{if eq .Params.showsublinks true }}
+                {{ range .Data.Pages }}
+                <a href="{{ .Permalink }}" title="{{ .Title }}">
+                    <h2>{{ .Title }}</h2>
+                </a>
 
-			{{ range .Data.Pages }}
-			<a href="{{ .Permalink }}" title="{{ .Title }}">
-				<h2>{{ .Title }}</h2>
-			</a>
+                <br>
+                {{ printf "%s" .Summary | markdownify }}
 
-			<br>
-			{{ printf "%s" .Summary | markdownify }}
+                <hr>
+                {{ end }}
 
-			<hr>
-			{{ end }}
-
-			<aside class="copyright" role="note">
-				{{ with .Site.Params.copyright }}
-				&copy; {{ now.Format "2006" }} {{ . }} &ndash;
-				{{ end }}
-				Documentation built with
-				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
-				using the
-				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
-			</aside>
+                <aside class="copyright" role="note">
+                    {{ with .Site.Params.copyright }}
+                    &copy; {{ now.Format "2006" }} {{ . }} &ndash;
+                    {{ end }}
+                    Documentation built with
+                    <a href="https://www.gohugo.io" target="_blank">Hugo</a>
+                    using the
+                    <a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+                </aside>
+            {{ end }}
 		</div>
 	</article>
 
