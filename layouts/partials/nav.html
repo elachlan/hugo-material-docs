@@ -7,7 +7,7 @@
   {{ if .HasChildren }}
     {{ partial "nav_link" $currentNode }}
     {{if $currentNode.Parent}}
-        {{if or (or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .)) (or ($currentNode.Parent.CurrentSection | $currentNode.IsDescendant) ($currentNode.Parent.CurrentSection | $currentNode.IsAncestor)) }}
+        {{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }}
             <ul>
               {{ range .Children }}
                 {{ $.Scratch.Set "currentMenuEntry" . }}
